@@ -1,0 +1,16 @@
+name: "api-tests"
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: supabase/setup-cli@v1
+        with:
+          version: 1.113.3
+      - run: apt update && apt install -y python3 python3-pip && python3 -m pip install --upgrade pip wheel && python3 -m pip install httpie
+      - run: supabase db reset
+      - run: supabase db dump -h
+      - run: supabase db dump --local --data-only --schema storage | grep avatars | wc -l
+      - run: http get http://localhost:54321
