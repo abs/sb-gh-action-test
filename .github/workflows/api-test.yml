@@ -1,6 +1,5 @@
 name: "api-tests"
-on:
-  pull_request:
+on: [push]
 
 jobs:
   build:
@@ -14,4 +13,4 @@ jobs:
       - run: supabase db reset
       - run: supabase db dump -h
       - run: supabase db dump --local --data-only --schema storage | grep avatars | wc -l
-      # - run: http get http://localhost:54321
+      - run: http get http://localhost:54321
