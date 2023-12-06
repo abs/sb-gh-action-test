@@ -15,8 +15,8 @@ jobs:
         with:
           version: latest
 
-      - name: Start db
-        run: supabase db start
+      - name: Start Supabase
+        run: supabase start
 
       - name: Migrate db
         run: supabase migration up
